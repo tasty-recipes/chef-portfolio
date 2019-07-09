@@ -5,7 +5,7 @@ const Main = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-
+    background-color: #ff5959;
 `
 
 const List = styled.ul`
