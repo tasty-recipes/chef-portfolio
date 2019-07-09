@@ -16,8 +16,6 @@ const Picture = () => {
 }
 
 const mapStateToProps = state => ({
-    pic: state.pic,
-    isPicLoading: state.isPicLoading,
 })
 
 export default connect(mapStateToProps, {})(Picture);

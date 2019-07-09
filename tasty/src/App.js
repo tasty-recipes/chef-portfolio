@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
-import { randomPic } from './store/actions';
+import Dashboard from './views/dashboard/Dashboard';
 import JumbotronView from './views/jumbotron/JumbotronView';
 import NavBar from './views/navbar/NavBar';
+import LoggedInNav from './views/navbar/LoggedInNav';
 import './App.css';
 
 class App extends React.Component {
@@ -17,16 +18,15 @@ class App extends React.Component {
 
   componentDidMount(){
     console.log('Loaded!');
-    this.props.randomPic();
   }
 
 
   render(){
     return (
       <div className="App">
-          <NavBar />
+          {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
           <JumbotronView />
-
+          <Route path='/dashboard' component={Dashboard} />
       </div>
     );
   }
@@ -34,7 +34,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   blogs: state.blogs,
-
+  token: state.token,
 })
 
-export default connect(mapStateToProps, { randomPic })(App);
+export default connect(mapStateToProps, { })(App);
