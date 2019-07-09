@@ -1,14 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
+import { randomPic } from './store/actions';
+import JumbotronView from './views/jumbotron/JumbotronView';
 import NavBar from './views/navbar/NavBar';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-        <NavBar />
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+
+    }
+  }
+
+  componentDidMount(){
+    console.log('Loaded!');
+    this.props.randomPic();
+  }
+
+
+  render(){
+    return (
+      <div className="App">
+          <NavBar />
+          <JumbotronView />
+
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  blogs: state.blogs,
+
+})
+
+export default connect(mapStateToProps, { randomPic })(App);
