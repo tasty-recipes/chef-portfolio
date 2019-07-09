@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-
 import { blogLoad } from './store/actions';
+
 import Blog from './components/blog/Blog';
 import Dashboard from './views/dashboard/Dashboard';
 import JumbotronView from './views/jumbotron/JumbotronView';
@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    console.log('Loaded!');
     this.props.blogLoad();
   }
 
