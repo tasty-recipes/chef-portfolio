@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
+import { blogLoad } from './store/actions';
+import Blog from './components/blog/Blog';
 import Dashboard from './views/dashboard/Dashboard';
 import JumbotronView from './views/jumbotron/JumbotronView';
 import NavBar from './views/navbar/NavBar';
@@ -18,6 +20,7 @@ class App extends React.Component {
 
   componentDidMount(){
     console.log('Loaded!');
+    this.props.blogLoad();
   }
 
 
@@ -26,6 +29,7 @@ class App extends React.Component {
       <div className="App">
           {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
           <JumbotronView />
+          <Blog />
           <Route path='/dashboard' component={Dashboard} />
       </div>
     );
@@ -37,4 +41,4 @@ const mapStateToProps = state => ({
   token: state.token,
 })
 
-export default connect(mapStateToProps, { })(App);
+export default connect(mapStateToProps, { blogLoad })(App);
