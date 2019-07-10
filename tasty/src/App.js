@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { blogLoad } from './store/actions';
 
 import Blog from './components/blog/Blog';
+import Footer from './views/footer/Footer';
 import Dashboard from './views/dashboard/Dashboard';
 import JumbotronView from './views/jumbotron/JumbotronView';
 import NavBar from './views/navbar/NavBar';
@@ -29,6 +30,7 @@ class App extends React.Component {
           {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
           <JumbotronView />
           <Blog />
+          <Footer />
           <Route path='/dashboard' component={Dashboard} />
       </div>
     );
