@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const Div = styled.div`
-    width: 32%;
+    width: 31.5%;
     margin: 10px;
     border: 1px dotted gray;
     border-radius: 10px;
