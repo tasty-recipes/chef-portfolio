@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { blogLoad } from './store/actions';
 
-import Blog from './components/blog/Blog';
+import PrivateRoute from './components/private/PrivateRoute';
+import Home from './views/home/Home';
 import Footer from './views/footer/Footer';
 import Dashboard from './views/dashboard/Dashboard';
-import JumbotronView from './views/jumbotron/JumbotronView';
 import NavBar from './views/navbar/NavBar';
 import LoggedInNav from './views/navbar/LoggedInNav';
 import './App.css';
@@ -28,10 +28,9 @@ class App extends React.Component {
     return (
       <div className="App">
           {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
-          <JumbotronView />
-          <Blog />
+          <Route exact path='/' component={Home} />
+          <PrivateRoute path='/dashboard' component={Dashboard} />
           <Footer />
-          <Route path='/dashboard' component={Dashboard} />
       </div>
     );
   }
