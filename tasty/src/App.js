@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { blogLoad } from './store/actions';
+
+import Blog from './components/blog/Blog';
+import Dashboard from './views/dashboard/Dashboard';
+import JumbotronView from './views/jumbotron/JumbotronView';
+import NavBar from './views/navbar/NavBar';
+import LoggedInNav from './views/navbar/LoggedInNav';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+
+    }
+  }
+
+  componentDidMount(){
+    this.props.blogLoad();
+  }
+
+
+  render(){
+    return (
+      <div className="App">
+          {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
+          <JumbotronView />
+          <Blog />
+          <Route path='/dashboard' component={Dashboard} />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  blogs: state.blogs,
+  token: state.token,
+})
+
+export default connect(mapStateToProps, { blogLoad })(App);
