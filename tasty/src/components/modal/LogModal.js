@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+import { login } from '../../store/actions';
 
 class LogModal extends React.Component {
   constructor(props) {
@@ -22,7 +25,6 @@ class LogModal extends React.Component {
   }
 
   toggle() {
-
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
@@ -46,6 +48,11 @@ class LogModal extends React.Component {
     })
   }
 
+  login = () => {
+    this.props.login(this.state.creds);
+    this.toggle();
+  }
+
   render() {
     return (
       <div>
@@ -56,31 +63,27 @@ class LogModal extends React.Component {
             <form>
               {(this.props.type === 'Log In') ? (
                 <div>
-                  <form>
-                      <h1>Username</h1>
-                      <input onChange={this.handleChanges} name="username" placeholder="Enter Username" value={this.state.creds.username} />
-                      <h1>Password</h1>
-                      <input onChange={this.handleChanges} name="password" placeholder="Enter Password" value={this.state.creds.password} />
-                  </form>
+                  <h1>Username</h1>
+                  <input onChange={this.handleChanges} name="username" placeholder="Enter Username" value={this.state.creds.username} />
+                  <h1>Password</h1>
+                  <input onChange={this.handleChanges} name="password" placeholder="Enter Password" value={this.state.creds.password} />
                 </div>
               ) : (
                 <div>
-                  <form>
-                    <h1>First Name</h1>
-                    <input onChange={this.handleSignChanges} name="fname" placeholder="Enter First Name" value={this.state.sign.fname} />
-                    <h1>Last Name</h1>
-                    <input onChange={this.handleSignChanges} name="lname" placeholder="Enter Last Name" value={this.state.sign.lname} />
-                    <h1>Username</h1>
-                    <input onChange={this.handleSignChanges} name="username" placeholder="Enter Username" value={this.state.sign.username} />
-                    <h1>Password</h1>
-                    <input onChange={this.handleSignChanges} name="password" placeholder="Enter Password" value={this.state.sign.password} />
-                  </form>
+                  <h1>First Name</h1>
+                  <input onChange={this.handleSignChanges} name="fname" placeholder="Enter First Name" value={this.state.sign.fname} />
+                  <h1>Last Name</h1>
+                  <input onChange={this.handleSignChanges} name="lname" placeholder="Enter Last Name" value={this.state.sign.lname} />
+                  <h1>Username</h1>
+                  <input onChange={this.handleSignChanges} name="username" placeholder="Enter Username" value={this.state.sign.username} />
+                  <h1>Password</h1>
+                  <input onChange={this.handleSignChanges} name="password" placeholder="Enter Password" value={this.state.sign.password} />
                 </div>
               )}
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>{this.props.type}</Button>{' '}
+            <Button color="primary" onClick={(this.props.type === 'Log In') ? this.login : null}>{this.props.type}</Button>{' '}
             <Button color="danger" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -89,4 +92,8 @@ class LogModal extends React.Component {
   }
 }
 
-export default LogModal;
+const mapStateToProps = state => ({
+  
+})
+
+export default connect(mapStateToProps, { login })(LogModal);

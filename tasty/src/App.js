@@ -7,8 +7,6 @@ import PrivateRoute from './components/private/PrivateRoute';
 import Home from './views/home/Home';
 import Footer from './views/footer/Footer';
 import Dashboard from './views/dashboard/Dashboard';
-import NavBar from './views/navbar/NavBar';
-import LoggedInNav from './views/navbar/LoggedInNav';
 import './App.css';
 
 class App extends React.Component {
@@ -27,9 +25,8 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-          {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
           <Route exact path='/' component={Home} />
-          <Route path='/dashboard' component={Dashboard} />
+          <PrivateRoute path='/dashboard' component={Dashboard} />
           <Footer />
       </div>
     );

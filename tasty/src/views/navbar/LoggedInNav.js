@@ -1,5 +1,8 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 import styled from 'styled-components';
+import { signOut } from '../../store/actions';
+import { connect } from 'react-redux';
 
 const Main = styled.div`
     display: flex;
@@ -23,7 +26,7 @@ const Title = styled.h1`
     margin: 10px;
 `
 
-const LoggedInNav = () => {
+const LoggedInNav = (props) => {
     return(
         <Main>
             <div>
@@ -31,12 +34,16 @@ const LoggedInNav = () => {
             </div>
             <div>
                 <List>
-                    <Items>Log out</Items>
-                    <Items>About</Items>
+                    <Items>
+                        <Button onClick={props.signOut}>Log out</Button>
+                    </Items>
+                    <Items>
+                        <Button>About</Button>
+                    </Items>
                 </List>
             </div>
         </Main>
     )
 }
 
-export default LoggedInNav;
+export default connect(null, { signOut })(LoggedInNav);

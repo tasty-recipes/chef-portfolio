@@ -14,3 +14,48 @@ export const blogLoad = () => dispatch => {
         console.log(err);
     })
 }
+
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const login = (creds) => dispatch => {
+    dispatch({ type: LOGIN_START });
+    return axios.post('https://chefio.herokuapp.com/oauth/token', `grant_type=password&username=${creds.username}&password=${creds.password}`, {
+        headers: {
+            Authorization: `Basic ${btoa('chef-client:chef-secret')}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(res => {
+        console.log(res);
+        localStorage.setItem('token', res.data.access_token);
+        this.props.history.push('/dashboard');
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+
+
+export const SIGN_UP_START = 'SIGN_UP_START';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const signUp = (creds) => dispatch => {
+    dispatch({ type: SIGN_UP_START });
+    return axios.post('https://chefio.herokuapp.com/createnewuser', 'Author')
+}
+
+export const SIGN_OUT_START = 'SIGN_OUT_START';
+export const SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';
+export const SIGN_OUT_FAILURE = 'SIGN_OUT_FAILURE';
+export const signOut = () => dispatch => {
+    dispatch({ type: SIGN_OUT_START });
+    return axios.get('https://chefio.herokuapp.com/oauth/revoke-token')
+    .then(res => {
+        console.log(res);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}

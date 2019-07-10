@@ -1,4 +1,5 @@
 import { BLOG_START, BLOG_SUCCESS, BLOG_FAILURE } from '../actions';
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions';
 
 const initalState = {
     blogs: [],
@@ -28,6 +29,25 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 error: action.payload,
                 pic: '',
+            }
+        case LOGIN_START:
+            return {
+                ...state,
+                isLoggingIn: true,
+                error: '',
+            }
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+                isLoggingIn: false,
+                token: action.payload,
+            }
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                isLoggingIn: false,
+                error: action.payload,
             }
         default:
             return state;

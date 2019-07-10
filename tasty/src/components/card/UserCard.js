@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardBody,
+  CardTitle, Button } from 'reactstrap';
 import styled from 'styled-components';
 
 const Main = styled.div`
@@ -22,10 +22,10 @@ class UserCard extends React.Component {
               <Card>
                 <CardBody>
                   <CardTitle>Submit your Yums!</CardTitle>
-                  <CardText>
+                  <div>
                     <div>
                       <div>
-                        <h4>Title:</h4>
+                        <h4>Title</h4>
                         <input />
                       </div>
                       <div>
@@ -37,8 +37,7 @@ class UserCard extends React.Component {
                         <input placholder="Thoughts?.." />
                       </div>
                     </div>
-                  </CardText>
-                  <CardSubtitle>This is Final!</CardSubtitle>
+                  </div>
                   <Button>Submit</Button>
                 </CardBody>
               </Card>
