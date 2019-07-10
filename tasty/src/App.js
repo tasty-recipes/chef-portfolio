@@ -29,7 +29,7 @@ class App extends React.Component {
       <div className="App">
           {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
           <Route exact path='/' component={Home} />
-          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <Route path='/dashboard' component={Dashboard} />
           <Footer />
       </div>
     );
