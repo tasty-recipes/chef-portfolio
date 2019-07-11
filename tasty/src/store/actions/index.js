@@ -61,3 +61,26 @@ export const signOut = () => dispatch => {
         dispatch({ type: SIGN_OUT_FAILURE, payload: err });
     })
 }
+
+export const NEW_USER_START = 'NEW_USER_START';
+export const NEW_USER_SUCCESS = 'NEW_USER_SUCCESS';
+export const NEW_USER_FAILURE = 'NEW_USER_FAILURE';
+export const newUser = (creds) => dispatch => {
+    dispatch({ type: NEW_USER_START });
+    return axios.post('https://chefio.herokuapp.com/createnewuser', `{"username": "${creds.username}", "password": "${creds.password}", "fname": "${creds.fname}", "lname": "${creds.lname}" }`, {
+        headers: {
+            Authorization: `Basic ${btoa('chef-client:chef-secret')}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {
+        console.log(res);
+        dispatch({ type: NEW_USER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+        console.log(err);
+        dispatch({ type: NEW_USER_FAILURE, payload: err });
+    })
+}
+
+{ /* Authorization: `Bearer ${localStorage.getItem('token')} */}

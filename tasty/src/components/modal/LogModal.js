@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import { login } from '../../store/actions';
+import { login, newUser } from '../../store/actions';
 
 class LogModal extends React.Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class LogModal extends React.Component {
         password: '',
       }
     };
+    console.log(this.props.type);
 
     this.toggle = this.toggle.bind(this);
   }
@@ -52,7 +53,11 @@ class LogModal extends React.Component {
   login = () => {
     this.props.login(this.state.creds);
     this.toggle();
-    this.props.dashboard();
+  }
+
+  newUser = () => {
+    this.props.newUser(this.state.sign);
+    this.toggle();
   }
 
   render() {
@@ -85,7 +90,15 @@ class LogModal extends React.Component {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={(this.props.type === 'Log In') ? this.login : null}>{this.props.type}</Button>{' '}
+                {(this.props.type === 'Sign Up') ? (
+                  <div>
+                    <Button color="primary" onClick={this.newUser}>{this.props.type}</Button>{' '}
+                  </div>
+                ) : (
+                  <div>
+                    <Button color="primary" onClick={this.login}>{this.props.type}</Button>{' '}
+                  </div>
+                )}
             <Button color="danger" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -98,4 +111,4 @@ const mapStateToProps = state => ({
   
 })
 
-export default withRouter(connect(mapStateToProps, { login })(LogModal));
+export default withRouter(connect(mapStateToProps, { login, newUser })(LogModal));
