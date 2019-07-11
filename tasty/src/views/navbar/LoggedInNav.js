@@ -26,24 +26,37 @@ const Title = styled.h1`
     margin: 10px;
 `
 
-const LoggedInNav = (props) => {
-    return(
-        <Main>
-            <div>
-                <Title>Tasty Recipes</Title>
-            </div>
-            <div>
-                <List>
-                    <Items>
-                        <Button onClick={props.signOut}>Log out</Button>
-                    </Items>
-                    <Items>
-                        <Button>About</Button>
-                    </Items>
-                </List>
-            </div>
-        </Main>
-    )
+class LoggedInNav extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+
+        }
+    }
+
+    signOff = () => {
+        localStorage.removeItem('token');
+    }
+
+    render(){
+        return(
+            <Main>
+                <div>
+                    <Title>Tasty Recipes</Title>
+                </div>
+                <div>
+                    <List>
+                        <Items>
+                            <Button onClick={this.signOff}>Log out</Button>
+                        </Items>
+                        <Items>
+                            <Button>About</Button>
+                        </Items>
+                    </List>
+                </div>
+            </Main>
+        )
+    }
 }
 
 export default connect(null, { signOut })(LoggedInNav);

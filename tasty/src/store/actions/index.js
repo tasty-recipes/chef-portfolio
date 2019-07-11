@@ -29,7 +29,7 @@ export const login = (creds) => dispatch => {
     .then(res => {
         console.log(res);
         localStorage.setItem('token', res.data.access_token);
-        this.props.history.push('/dashboard');
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data.access_token })
     })
     .catch(err => {
         console.log(err);
@@ -54,8 +54,10 @@ export const signOut = () => dispatch => {
     return axios.get('https://chefio.herokuapp.com/oauth/revoke-token')
     .then(res => {
         console.log(res);
+        dispatch({ type: SIGN_OUT_SUCCESS, payload: res.data });
     })
     .catch(err => {
         console.log(err);
+        dispatch({ type: SIGN_OUT_FAILURE, payload: err });
     })
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { login } from '../../store/actions';
@@ -51,6 +52,7 @@ class LogModal extends React.Component {
   login = () => {
     this.props.login(this.state.creds);
     this.toggle();
+    this.props.dashboard();
   }
 
   render() {
@@ -96,4 +98,4 @@ const mapStateToProps = state => ({
   
 })
 
-export default connect(mapStateToProps, { login })(LogModal);
+export default withRouter(connect(mapStateToProps, { login })(LogModal));
