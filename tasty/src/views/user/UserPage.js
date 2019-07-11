@@ -28,8 +28,8 @@ class UserPage extends React.Component{
                     <h1>Welcome User!</h1>
                 </div>
                 <CardDiv>
-                    <UserCard />
-                    <UserCard />
+                    <UserCard type="newBlog" />
+                    <UserCard type="users" />
                     <UserCard />
                 </CardDiv>
             </Main>

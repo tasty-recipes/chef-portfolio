@@ -6,6 +6,7 @@ import { NEW_USER_START, NEW_USER_SUCCESS, NEW_USER_FAILURE } from '../actions';
 const initalState = {
     blogs: [],
     token: '',
+    users: [],
     isLoggedIn: false,
     isLoggingIn: false,
     error: null,

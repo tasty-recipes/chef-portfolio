@@ -2,6 +2,9 @@ import React from 'react';
 import { Card, CardBody,
   CardTitle, Button } from 'reactstrap';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import { users } from '../../store/actions';
 
 const Main = styled.div`
   border: 1px solid lightslategray;
@@ -16,9 +19,15 @@ class UserCard extends React.Component {
 
         }
     }
+
+    componentDidMount(){
+      this.props.users();
+    }
+
     render(){
         return (
             <Main>
+            {(this.props.type === 'newBlog') ? (
               <Card>
                 <CardBody>
                   <CardTitle>Submit your Yums!</CardTitle>
@@ -41,9 +50,28 @@ class UserCard extends React.Component {
                   <Button>Submit</Button>
                 </CardBody>
               </Card>
+            ) : (
+              <Card>
+                <CardBody>
+                  <CardTitle></CardTitle>
+                  {this.props.userList.map(user => {
+                    return (
+                      <div>
+
+                      </div>
+                    )
+                  })}
+                </CardBody>
+              </Card>
+            )}
+              
             </Main>
         );
     }
 };
 
-export default UserCard;
+const mapStateToProps = state => ({
+  userList: state.users,
+})
+
+export default connect(mapStateToProps, { users })(UserCard);

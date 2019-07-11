@@ -83,4 +83,24 @@ export const newUser = (creds) => dispatch => {
     })
 }
 
+export const FETCH_USERS_START = 'FETCH_USERS_START';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
+export const users = () => dispatch => {
+    dispatch({ type: FETCH_USERS_START });
+    return axios.get('https://chefio.herokuapp.com/users/users', {
+
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Accept': 'application/json'
+    })
+    .then(res => {
+        console.log(res);
+        dispatch({ type: FETCH_USERS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+        console.log(err);
+        dispatch({ type: FETCH_USERS_FAILURE, payload: err });
+    })
+}
+
 { /* Authorization: `Bearer ${localStorage.getItem('token')} */}
