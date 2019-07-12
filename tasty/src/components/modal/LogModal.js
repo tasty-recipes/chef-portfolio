@@ -2,8 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import styled from 'styled-components';
 
 import { login, newUser } from '../../store/actions';
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Top = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const Test = styled.div`
+  width: 49.5%;
+  text-align: center;
+`
+
+const Bottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 class LogModal extends React.Component {
   constructor(props) {
@@ -11,17 +33,19 @@ class LogModal extends React.Component {
     this.state = {
       modal: false,
       sign: {
-        username: '',
+        email: '',
+        name: '',
+        address: '',
+        city: '',
+        state: '',
+        "zip code": '',
         password: '',
-        fname: '',
-        lname: '',
       },
       creds: {
-        username: '',
+        email: '',
         password: '',
       }
     };
-    console.log(this.props.type);
 
     this.toggle = this.toggle.bind(this);
   }
@@ -58,6 +82,17 @@ class LogModal extends React.Component {
   newUser = () => {
     this.props.newUser(this.state.sign);
     this.toggle();
+    this.setState({
+      sign: {
+        email: '',
+        name: '',
+        address: '',
+        city: '',
+        state: '',
+        "zip code": '',
+        password: '',
+      }
+    })
   }
 
   render() {
@@ -71,21 +106,35 @@ class LogModal extends React.Component {
               {(this.props.type === 'Log In') ? (
                 <div>
                   <h1>Username</h1>
-                  <input onChange={this.handleChanges} name="username" placeholder="Enter Username" value={this.state.creds.username} />
+                  <input onChange={this.handleChanges} name="email" placeholder="Enter Email" value={this.state.creds.email} />
                   <h1>Password</h1>
                   <input onChange={this.handleChanges} name="password" placeholder="Enter Password" value={this.state.creds.password} />
                 </div>
               ) : (
-                <div>
-                  <h1>First Name</h1>
-                  <input onChange={this.handleSignChanges} name="fname" placeholder="Enter First Name" value={this.state.sign.fname} />
-                  <h1>Last Name</h1>
-                  <input onChange={this.handleSignChanges} name="lname" placeholder="Enter Last Name" value={this.state.sign.lname} />
-                  <h1>Username</h1>
-                  <input onChange={this.handleSignChanges} name="username" placeholder="Enter Username" value={this.state.sign.username} />
-                  <h1>Password</h1>
-                  <input onChange={this.handleSignChanges} name="password" placeholder="Enter Password" value={this.state.sign.password} />
-                </div>
+                <Main>
+                  <Top>
+                    <Test>
+                      <h3>E-Mail</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="email" placeholder="Enter E-Mail" value={this.state.sign.email} />
+                      <h3>Name</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="name" placeholder="Enter Name" value={this.state.sign.name} />
+                      <h3>Address</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="address" placeholder="Enter Username" value={this.state.sign.address} />
+                    </Test>
+                    <Test>
+                      <h3>City</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="city" placeholder="Enter City" value={this.state.sign.city} />
+                      <h3>State</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="state" placeholder="Enter State" value={this.state.sign.state} />
+                      <h3>Zipcode</h3>
+                      <input onChange={this.handleSignChanges} type="text" name="zip code" placeholder="Enter Zip Code" value={this.state.sign["zip code"]} />
+                    </Test>
+                  </Top>
+                  <Bottom>
+                    <h3>Password</h3>
+                    <input onChange={this.handleSignChanges} type="password" name="password" placeholder="Enter Password" value={this.state.sign.password} />
+                  </Bottom>
+                </Main>
               )}
             </form>
           </ModalBody>
