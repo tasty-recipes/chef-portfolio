@@ -33,10 +33,10 @@ const NavBar = (props) => {
             </div>
             <Right>
                 <Btns>
-                    <LogModal dashboard={props.dashboard} buttonLabel={'Sign Up'} type={'Sign Up'} />
+                    <LogModal buttonLabel={'Sign Up'} type={'Sign Up'} />
                 </Btns>
                 <Btns>
-                    <LogModal buttonLabel={'Log In'} type={'Log In'} />
+                    <LogModal dashboard={props.history} buttonLabel={'Log In'} type={'Log In'} />
                 </Btns>
             </Right>
         </Main>

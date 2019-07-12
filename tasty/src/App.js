@@ -33,7 +33,7 @@ class App extends React.Component {
       <div className="App">
           {localStorage.getItem('token') !== null ? <LoggedInNav dashboard={this.loadNew} /> : <NavBar history={this.loadNew} />}
           <Route exact path='/' component={Home} />
-          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <Route path='/dashboard' component={Dashboard} />
           <Footer />
       </div>
     );

@@ -77,6 +77,7 @@ class LogModal extends React.Component {
   login = () => {
     this.props.login(this.state.creds);
     this.toggle();
+    this.props.dashboard();
   }
 
   newUser = () => {
@@ -157,7 +158,7 @@ class LogModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  
+  token: state.token,
 })
 
 export default withRouter(connect(mapStateToProps, { login, newUser })(LogModal));
