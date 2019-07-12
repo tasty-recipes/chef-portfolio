@@ -24,8 +24,9 @@ const Btns = styled.div`
     margin: 10px;
 `
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
+        
         <Main>
             <div>
                 <Title>Tasty Recipes</Title>
@@ -35,7 +36,7 @@ const NavBar = () => {
                     <LogModal buttonLabel={'Sign Up'} type={'Sign Up'} />
                 </Btns>
                 <Btns>
-                    <LogModal buttonLabel={'Log In'} type={'Log In'} />
+                    <LogModal dashboard={props.history} buttonLabel={'Log In'} type={'Log In'} />
                 </Btns>
             </Right>
         </Main>

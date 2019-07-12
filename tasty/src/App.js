@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { blogLoad } from './store/actions';
 
-import Blog from './components/blog/Blog';
-import Dashboard from './views/dashboard/Dashboard';
-import JumbotronView from './views/jumbotron/JumbotronView';
+import PrivateRoute from './components/private/PrivateRoute';
 import NavBar from './views/navbar/NavBar';
-import LoggedInNav from './views/navbar/LoggedInNav';
+import Home from './views/home/Home';
+import Footer from './views/footer/Footer';
+import Dashboard from './views/dashboard/Dashboard';
 import './App.css';
+import LoggedInNav from './views/navbar/LoggedInNav';
 
 class App extends React.Component {
   constructor(){
@@ -22,21 +23,24 @@ class App extends React.Component {
     this.props.blogLoad();
   }
 
+  loadNew = () => {
+    this.props.history.push('/dashboard');
+  }
+
 
   render(){
     return (
       <div className="App">
-          {(this.props.token !== '') ? <LoggedInNav />:<NavBar />}
-          <JumbotronView />
-          <Blog />
+          {localStorage.getItem('token') !== null ? <LoggedInNav dashboard={this.loadNew} /> : <NavBar history={this.loadNew} />}
+          <Route exact path='/' component={Home} />
           <Route path='/dashboard' component={Dashboard} />
+          <Footer />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  blogs: state.blogs,
   token: state.token,
 })
 

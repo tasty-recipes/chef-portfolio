@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+
 const Div = styled.div`
     width: 31.5%;
     margin: 10px;
